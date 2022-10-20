@@ -1,0 +1,12 @@
+* Misc Smalltalk Sscripts
+
+The MiscPharoScripts Project is my various extensions, applications,
+and throw away ideas in Pharo. Some ideas may be intersting, while
+other functions are utterly mundane and used to explore Pharo itself.
+
+#+begin_src smalltalk
+  Metacello new
+    baseline: 'MiscPharoScripts';
+    repository: 'github://mariari/Misc-Smalltalk-Scripts';
+    load.
+#+end_src
