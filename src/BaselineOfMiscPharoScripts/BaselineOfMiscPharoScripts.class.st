@@ -46,6 +46,6 @@ BaselineOfMiscPharoScripts >> pharoFunctional: spec [
 
 	spec baseline: 'PharoFunctional' with: [
 		spec
-			repository: 'github://dvmason/Pharo-Functional:mater';
+			repository: 'github://dvmason/Pharo-Functional:master';
 			loads: 'default' ]
 ]
