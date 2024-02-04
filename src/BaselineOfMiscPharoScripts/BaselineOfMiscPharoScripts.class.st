@@ -21,12 +21,14 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #BaselineOfMiscPharoScripts,
-	#superclass : #BaselineOf,
-	#category : #'BaselineOfMiscPharoScripts-Baseline'
+	#name : 'BaselineOfMiscPharoScripts',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfMiscPharoScripts-Baseline',
+	#package : 'BaselineOfMiscPharoScripts',
+	#tag : 'Baseline'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfMiscPharoScripts >> baseline: spec [
 
 	<baseline>
@@ -39,12 +41,11 @@ BaselineOfMiscPharoScripts >> baseline: spec [
 			with: [ spec requires: #( 'MiscPharoScripts' ) ] ]
 ]
 
-{ #category : #'external projects' }
+{ #category : 'external projects' }
 BaselineOfMiscPharoScripts >> pharoFunctional: spec [
-	
-		spec baseline: 'PharoFunctional' with: [ 
+
+	spec baseline: 'PharoFunctional' with: [
 		spec
-			repository: (self packageRepositoryURL ifEmpty: [ 
-						 'github://dvmason/Pharo-Functional:master' ]);
+			repository: 'github://dvmason/Pharo-Functional:mater';
 			loads: 'default' ]
 ]
