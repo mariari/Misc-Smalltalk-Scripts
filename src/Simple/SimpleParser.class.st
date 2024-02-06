@@ -19,7 +19,8 @@ SimpleParser class >> source: str [
 
 	"scope: class-variables  &  class-instance-variables"
 
-	^ self new lexer: (SimpleLexer source: str)  startNode: 10
+	SimpleNode initialize.
+	^ self new lexer: (SimpleLexer source: str) startNode: (SimpleStartNode newNode: {} )
 ]
 
 { #category : 'initialization' }
