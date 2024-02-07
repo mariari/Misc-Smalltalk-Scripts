@@ -30,7 +30,7 @@ SimpleNodeCounter class >> singleton [
 ]
 
 { #category : 'initialization' }
-SimpleNodeCounter >> initalize [
+SimpleNodeCounter >> initialize [
 
 	self reset.
 	^ self
