@@ -30,3 +30,33 @@ SimpleNodeTest >> testInputsWith [
 	self assert: node_1 outputSize equals: 1.
 	self assert: node_2 isUnused.
 ]
+
+{ #category : 'tests' }
+SimpleNodeTest >> testNoSemicolon [
+
+	self should: [ (SimpleParser source: 'return 100') parse ] raise: Error
+]
+
+{ #category : 'tests' }
+SimpleNodeTest >> testSimpleProgram [
+
+	| parser ret start expr |
+	parser := SimpleParser source: 'return 1;'.
+	ret := parser parse.
+	start := SimpleParser startNode.
+
+	self assert: ret ctrl equals: start.
+
+	expr := ret expr.
+	self assert: expr class equals: SimpleConstantNode.
+	self assert: start equals: (expr at: 1).
+	self assert: 1 equals: expr getValue
+]
+
+{ #category : 'tests' }
+SimpleNodeTest >> testStartingWith0 [
+
+	self
+		should: [ (SimpleParser source: 'return 0123;') parse ]
+		raise: Error
+]
