@@ -17,3 +17,26 @@ Class {
 	#package : 'Simple',
 	#tag : 'Base'
 }
+
+{ #category : 'instance creation' }
+SimpleConstantNode class >> newNode: value [
+	"Creates a new node"
+
+	| val |
+	val := super newNode: {SimpleParser startNode}.
+	val setValue: value.
+	^ val
+]
+
+{ #category : 'getter' }
+SimpleConstantNode >> getValue [
+
+	^ value
+]
+
+{ #category : 'setter' }
+SimpleConstantNode >> setValue: val [
+	"Gets the ith input node"
+
+	value := val.
+]
