@@ -32,13 +32,14 @@ Class {
 BaselineOfMiscPharoScripts >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ "Deps"
-		"self pharoFunctional: spec."
-		"Programs"
-		spec
-			package: 'MiscPharoScripts';
-			package: 'MiscPharoScriptsTests'
-			with: [ spec requires: #( 'MiscPharoScripts' ) ] ]
+	spec
+		for: #common
+		do: [ "Deps""self pharoFunctional: spec.""Programs"
+			spec
+				package: 'MiscPharoScripts';
+				package: 'MiscPharoScriptsTests'
+				with: [ spec requires: #( 'MiscPharoScripts' ) ];
+				package: 'Simple']
 ]
 
 { #category : 'external projects' }
