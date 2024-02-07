@@ -33,7 +33,7 @@ BaselineOfMiscPharoScripts >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [ "Deps"
-		self pharoFunctional: spec.
+		"self pharoFunctional: spec."
 		"Programs"
 		spec
 			package: 'MiscPharoScripts';
@@ -43,7 +43,7 @@ BaselineOfMiscPharoScripts >> baseline: spec [
 
 { #category : 'external projects' }
 BaselineOfMiscPharoScripts >> pharoFunctional: spec [
-
+"Do not load in any Pharo version newer than 9. This will brick your image"
 	spec baseline: 'PharoFunctional' with: [
 		spec
 			repository: 'github://dvmason/Pharo-Functional:master';
