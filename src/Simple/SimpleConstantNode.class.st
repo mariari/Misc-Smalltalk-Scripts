@@ -34,6 +34,15 @@ SimpleConstantNode >> getValue [
 	^ value
 ]
 
+{ #category : 'printing' }
+SimpleConstantNode >> printOn: aStream [
+	"Append to the argument, aStream, a sequence of characters that
+	identifies the receiver."
+	super printOn: aStream.
+	aStream nextPutAll:  ': '.
+	value printOn: aStream
+]
+
 { #category : 'setter' }
 SimpleConstantNode >> setValue: val [
 	"Gets the ith input node"

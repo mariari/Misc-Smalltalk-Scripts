@@ -98,3 +98,16 @@ SimpleNode >> outputs [
 
 	^ outputs
 ]
+
+{ #category : 'printing' }
+SimpleNode >> printOn: aStream [
+	"Append to the argument, aStream, a sequence of characters that
+	identifies the receiver."
+
+	| title |
+	title := ((self class name withoutSuffix: 'Node') withoutPrefix:
+		          'Simple') ifEmpty: [ 'Node' ].
+	aStream nextPutAll: title;
+	nextPutAll: ' '.
+	nid printOn: aStream
+]
