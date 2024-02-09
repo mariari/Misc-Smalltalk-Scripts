@@ -25,6 +25,19 @@ SimpleConstantNode class >> newNode: value [
 	^ val
 ]
 
+{ #category : 'analysis' }
+SimpleConstantNode >> compute [
+	"This function needs to be monotonic: See the Readme of the class for more information"
+
+	^ type
+]
+
+{ #category : 'analysis' }
+SimpleConstantNode >> idealize [
+
+	^ nil
+]
+
 { #category : 'printing' }
 SimpleConstantNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.

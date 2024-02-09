@@ -32,6 +32,19 @@ SimpleNodeTest >> testInputsWith [
 ]
 
 { #category : 'tests' }
+SimpleNodeTest >> testKill [
+
+	| node |
+	node := SimpleConstantNode newNode: (SimpleIntegerType constant: 3).
+	self assert: node isUnused.
+	node kill.
+	self
+		assert: (node isDead)
+		description:
+		'We can kill an unused node and it really is dead at the end'
+]
+
+{ #category : 'tests' }
 SimpleNodeTest >> testNoSemicolon [
 
 	self should: [ (SimpleParser source: 'return 100') parse ] raise: Error
