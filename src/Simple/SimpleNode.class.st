@@ -10,7 +10,8 @@ Class {
 	#instVars : [
 		'nid',
 		'inputs',
-		'outputs'
+		'outputs',
+		'type'
 	],
 	#category : 'Simple-Base',
 	#package : 'Simple',
@@ -110,4 +111,19 @@ SimpleNode >> printOn: aStream [
 	aStream nextPutAll: title;
 	nextPutAll: ' '.
 	nid printOn: aStream
+]
+
+{ #category : 'setter' }
+SimpleNode >> setType: val [
+	"Gets the ith input node"
+
+	type := val
+]
+
+{ #category : 'accessing' }
+SimpleNode >> type [
+	"Current computed type for this Node.  
+	This value changes as the graph changes 
+	and more knowledge is gained about the program."
+	^ type
 ]
