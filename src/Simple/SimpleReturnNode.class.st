@@ -22,6 +22,13 @@ SimpleReturnNode class >> control: ctrl data: data [
 			  data }
 ]
 
+{ #category : 'analysis' }
+SimpleReturnNode >> compute [
+	"This function needs to be monotonic: See the Readme of the class for more information"
+
+	^ SimpleType bottom
+]
+
 { #category : 'accessing' }
 SimpleReturnNode >> ctrl [
 
@@ -34,9 +41,24 @@ SimpleReturnNode >> expr [
 	^ self at: 2
 ]
 
+{ #category : 'analysis' }
+SimpleReturnNode >> idealize [
+
+	^ nil
+]
+
 { #category : 'testing' }
 SimpleReturnNode >> isCFG [
 	"Checks if the node is a CFG node"
 
 	^ true
+]
+
+{ #category : 'printing' }
+SimpleReturnNode >> printSingle: aStream [
+	"Tik tok with `#print0On:`"
+
+	aStream nextPutAll: 'return '.
+	self expr printSingleCheckDead: aStream.
+	aStream nextPutAll: ';'
 ]

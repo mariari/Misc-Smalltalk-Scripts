@@ -20,3 +20,12 @@ SimpleStartNode >> isCFG [
 
 	^ true
 ]
+
+{ #category : 'printing' }
+SimpleStartNode >> printSingle: aStream [
+	"Works in tandem with `#printSingleCheckDead`.
+
+	This one should be what the node looks like as if it were basic syntax"
+
+	aStream nextPutAll: self label
+]

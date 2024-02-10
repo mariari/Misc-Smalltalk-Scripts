@@ -18,6 +18,17 @@ SimpleNodeTest >> testAt [
 ]
 
 { #category : 'tests' }
+SimpleNodeTest >> testCompute [
+
+	| node_1 node_2 |
+	node_1 := SimpleConstantNode newNode: (SimpleIntegerType constant: 3).
+
+	node_2 := SimpleAddNode left: node_1 right: node_1.
+
+	self assert: node_2 compute val equals: 6
+]
+
+{ #category : 'tests' }
 SimpleNodeTest >> testInputsWith [
 
 	| node_1 node_2 |
@@ -29,6 +40,19 @@ SimpleNodeTest >> testInputsWith [
 	self assert: node_2 inputSize equals: 1.
 	self assert: node_1 outputSize equals: 1.
 	self assert: node_2 isUnused.
+]
+
+{ #category : 'tests' }
+SimpleNodeTest >> testKill [
+
+	| node |
+	node := SimpleConstantNode newNode: (SimpleIntegerType constant: 3).
+	self assert: node isUnused.
+	node kill.
+	self
+		assert: (node isDead)
+		description:
+		'We can kill an unused node and it really is dead at the end'
 ]
 
 { #category : 'tests' }
@@ -50,7 +74,7 @@ SimpleNodeTest >> testSimpleProgram [
 	expr := ret expr.
 	self assert: expr class equals: SimpleConstantNode.
 	self assert: start equals: (expr at: 1).
-	self assert: 1 equals: expr getValue
+	self assert: 1 equals: expr getType 
 ]
 
 { #category : 'tests' }

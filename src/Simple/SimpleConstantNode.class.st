@@ -10,9 +10,6 @@ value. As we add other types of constants, we will refactor how we represent Con
 Class {
 	#name : 'SimpleConstantNode',
 	#superclass : 'SimpleNode',
-	#instVars : [
-		'value'
-	],
 	#category : 'Simple-Base',
 	#package : 'Simple',
 	#tag : 'Base'
@@ -23,20 +20,29 @@ SimpleConstantNode class >> newNode: value [
 	"Creates a new node"
 
 	| val |
-	val := super newNode: {SimpleParser startNode}.
-	val setValue: value.
+	val := super newNode: { SimpleParser startNode }.
+	val setType: value.
 	^ val
 ]
 
-{ #category : 'getter' }
-SimpleConstantNode >> getValue [
+{ #category : 'analysis' }
+SimpleConstantNode >> compute [
+	"This function needs to be monotonic: See the Readme of the class for more information"
 
-	^ value
+	^ type
 ]
 
-{ #category : 'setter' }
-SimpleConstantNode >> setValue: val [
-	"Gets the ith input node"
+{ #category : 'analysis' }
+SimpleConstantNode >> idealize [
 
-	value := val.
+	^ nil
+]
+
+{ #category : 'printing' }
+SimpleConstantNode >> printSingle: aStream [
+	"Works in tandem with `#printSingleCheckDead`.
+	
+	This one should be what the node looks like as if it were basic syntax"
+
+	^ type printOn: aStream
 ]

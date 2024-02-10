@@ -36,14 +36,14 @@ SimpleNodeCounter >> initialize [
 	^ self
 ]
 
-{ #category : 'creation' }
+{ #category : 'as yet unclassified' }
 SimpleNodeCounter >> newNode [
 
 	value := value + 1.
 	^ value - 1
 ]
 
-{ #category : 'initialization' }
+{ #category : 'as yet unclassified' }
 SimpleNodeCounter >> reset [
 
 value := 1.
