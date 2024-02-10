@@ -65,6 +65,20 @@ SimpleNode >> compute [
 	self subclassResponsibility
 ]
 
+{ #category : 'private - analysis' }
+SimpleNode >> computeBiOpNumberWith: ablock [
+
+	| ty1 ty2 |
+	ty1 := (self at: 2) type.
+	ty2 := (self at: 3) type.
+	(ty2 isKindOf: SimpleIntegerType) & (ty1 isKindOf: SimpleIntegerType)
+		ifTrue: [
+			ty1 isConstant & ty2 isConstant ifTrue: [
+				^ ablock value: ty1 value: ty2 ] ].
+
+	^ SimpleType bottom
+]
+
 { #category : 'printing' }
 SimpleNode >> deadName [
 	"The name that gets printed when the Node is dead. Typically unique: dead"

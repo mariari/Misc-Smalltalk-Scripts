@@ -72,6 +72,12 @@ SimpleType class >> withValue: value [
 	^ self new setTypeValue: value
 ]
 
+{ #category : 'private - creation' }
+SimpleType >> getType [
+
+	^ type
+]
+
 { #category : 'testing' }
 SimpleType >> isConstant [ 
 

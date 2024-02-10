@@ -18,6 +18,17 @@ SimpleNodeTest >> testAt [
 ]
 
 { #category : 'tests' }
+SimpleNodeTest >> testCompute [
+
+	| node_1 node_2 |
+	node_1 := SimpleConstantNode newNode: (SimpleIntegerType constant: 3).
+
+	node_2 := SimpleAddNode left: node_1 right: node_1.
+
+	self assert: node_2 compute val equals: 6
+]
+
+{ #category : 'tests' }
 SimpleNodeTest >> testInputsWith [
 
 	| node_1 node_2 |

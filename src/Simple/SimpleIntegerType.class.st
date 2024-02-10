@@ -28,6 +28,12 @@ SimpleIntegerType class >> withValue: value [
 ^val 
 ]
 
+{ #category : 'instance creation' }
+SimpleIntegerType class >> zero [
+
+	^ self withValue: 0
+]
+
 { #category : 'comparing' }
 SimpleIntegerType >> = anObject [
 	"Answer whether the receiver and the argument represent the same
