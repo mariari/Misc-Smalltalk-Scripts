@@ -53,7 +53,7 @@ SimpleNode >> addOutput: node [
 
 { #category : 'accessing' }
 SimpleNode >> at: index [
-	"Gets the ith input node"
+	"Gets the ith input node, may return a `SimpleNode` or nil"
 
 	^ inputs at: index
 ]

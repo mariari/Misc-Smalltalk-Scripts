@@ -43,11 +43,11 @@ SimpleLexerTest >> testParseNumber [
 
 	| lex |
 	lex := SimpleLexer source: '1231'.
-	self assert: lex parseNumber equals: 1231.
+	self assert: lex parseNumber val equals: 1231.
 	self should: [ lex parseNumber ] raise: Error.
 	
 	lex := SimpleLexer source: '123451Nimbari'.
-	self assert: lex parseNumber equals: 123451.
+	self assert: lex parseNumber val equals: 123451.
 	self assert: lex getAnyNextToken equals: 'Nimbari' 
 ]
 

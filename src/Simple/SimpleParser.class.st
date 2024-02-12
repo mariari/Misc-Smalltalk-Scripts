@@ -80,14 +80,16 @@ SimpleParser >> parseIntegerLiteral [
 	
 	- integerLiteral : [1-9][0-9]* | [0]"
 
-	^ SimpleConstantNode newNode: (lexer parseNumber )
+	^ (SimpleConstantNode newNode: lexer parseNumber) peephole
 ]
 
 { #category : 'private - parsing' }
 SimpleParser >> parsePrimary [
 	"Parrse a primary expression
 	
-	- PrimaryExpr : IntegerLiteral"
+	- PrimaryExpr : IntegerLiteral | Identifier | '(' expression ')'
+	
+	Never null"
 
 	lexer skipWhitespace.
 	lexer isNumber ifTrue: [ ^ self parseIntegerLiteral ].

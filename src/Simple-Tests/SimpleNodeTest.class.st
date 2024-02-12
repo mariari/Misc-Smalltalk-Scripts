@@ -74,7 +74,7 @@ SimpleNodeTest >> testSimpleProgram [
 	expr := ret expr.
 	self assert: expr class equals: SimpleConstantNode.
 	self assert: start equals: (expr at: 1).
-	self assert: 1 equals: expr getType 
+	self assert: 1 equals: expr getType val
 ]
 
 { #category : 'tests' }

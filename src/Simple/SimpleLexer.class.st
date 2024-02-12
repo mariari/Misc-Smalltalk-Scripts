@@ -110,7 +110,7 @@ SimpleLexer >> parseNumber [
 	ssize := snum size.
 	ssize = 0 | (ssize > 1 and: [ (snum at: 1) = $0 ]) ifTrue: [
 		Error signal: 'Syntax error: integer values cannot start with: 0' ].
-	^ snum asNumber
+	^ SimpleIntegerType withValue: snum  asNumber
 ]
 
 { #category : 'private - tokenizing' }
@@ -129,6 +129,17 @@ SimpleLexer >> peek [
 	^ self isEOF
 		  ifTrue:  [ "special value that ends parsing" Character end ]
 		  ifFalse: [ (input at: position) asCharacter ]
+]
+
+{ #category : 'printing' }
+SimpleLexer >> printOn: aStream [
+	"Append to the argument, aStream, a sequence of characters that
+	identifies the receiver."
+
+	super printOn: aStream.
+	aStream nextPutAll: '('.
+	aStream nextPutAll: (input copyFrom: position  to: input size).
+	aStream nextPutAll: ')'.
 ]
 
 { #category : 'private - tokenizing' }
