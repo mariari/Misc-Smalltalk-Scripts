@@ -226,7 +226,7 @@ SimpleNode >> peephole [
 		"Q: how does this imply `self` is unused to do this?"
 		"A: Seems it's not general, chapter 5 fixes this"
 		self kill.
-		(SimpleConstantNode newNode: type) peephole ].
+		^ (SimpleConstantNode newNode: computed_type) peephole ].
 	n := self idealize.
 	^ n ifNotNil: [ ^ n ]  ifNil: [ ^ self  ]
 ]
