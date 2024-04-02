@@ -113,11 +113,7 @@ SimpleLexer >> parseNumber [
 
 { #category : #'private - tokenizing' }
 SimpleLexer >> parsePunctuation [
-
-	| start |
-	start := position.
-	position := position + 1.
-	^ (input copyFrom: start to: start) as: String
+	^ self nextChar asString
 ]
 
 { #category : #'private - tokenizing' }
@@ -142,14 +138,13 @@ SimpleLexer >> printOn: aStream [
 
 { #category : #'private - tokenizing' }
 SimpleLexer >> readUntil: ablock [
-	"reads until the block returns false, moving the parser. 
-	The given block should call nextChar in some way"
+	"reads until the block returns false, moving the parser."
 
 	| start str |
 	start := position.
 	[  ablock value: self nextChar  ] whileTrue.
 	str := input copyFrom: start to: position - 2.
-	str ifNotEmpty: [ position := position - 1 ].
+	position := position - 1.
 	^ str as: String
 ]
 
