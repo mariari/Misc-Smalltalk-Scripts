@@ -1,6 +1,6 @@
-Extension { #name : 'SequenceableCollectionTest' }
+Extension { #name : #SequenceableCollectionTest }
 
-{ #category : '*Simple-Tests' }
+{ #category : #'*Simple-Tests' }
 SequenceableCollectionTest >> testStartsWithAt [
 
 	self assert: ('0123456789' startsWith: '12345' at: 2).

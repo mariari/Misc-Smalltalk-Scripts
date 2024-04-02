@@ -2,13 +2,12 @@
 A SimpleAddNodeTest is a test class for testing the behavior of SimpleAddNode
 "
 Class {
-	#name : 'SimpleAddNodeTest',
-	#superclass : 'TestCase',
-	#category : 'Simple-Tests',
-	#package : 'Simple-Tests'
+	#name : #SimpleAddNodeTest,
+	#superclass : #TestCase,
+	#category : 'Simple-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleAddNodeTest >> testCompute [
 
 	| node_1 node_2 node_3 node_4 |
