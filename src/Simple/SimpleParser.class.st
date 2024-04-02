@@ -65,6 +65,21 @@ SimpleParser >> parse [
 ]
 
 { #category : #'private - parsing' }
+SimpleParser >> parseAddition [
+	"Parse an additive expression
+	
+	- additiveEpxr : multiplicativeExpr (('+' | '-') multiplicativeExpr)*"
+
+	| lhs |
+	lhs := self parseMultiplication.
+	(lexer match: '+')
+		ifTrue: [ ^ (SimpleAddNode left: lhs right: self parseAddition) peephole ].
+	(lexer match: '-')
+		ifTrue: [ ^ (SimpleSubNode left: lhs right: self parseAddition) peephole ].
+	^ lhs
+]
+
+{ #category : #'private - parsing' }
 SimpleParser >> parseExpression [
 	"Parse an epxression of the form:
 	- epxr: additiveExpr"
@@ -79,6 +94,21 @@ SimpleParser >> parseIntegerLiteral [
 	- integerLiteral : [1-9][0-9]* | [0]"
 
 	^ (SimpleConstantNode newNode: lexer parseNumber) peephole
+]
+
+{ #category : #'private - parsing' }
+SimpleParser >> parseMultiplication [
+	"Parse a mullplicative expression
+	
+	- multiplicativeExpr : unaryExpr (('*' | '/') unaryExpr)*"
+
+	| lhs |
+	lhs := self parseUnary.
+	(lexer match: '*')
+		ifTrue: [ ^ (SimpleMulNode left: lhs right: self parseMultiplication) peephole ].
+	(lexer match: '/')
+		ifTrue: [ ^ (SimpleDivNode left: lhs right: self parseMultiplication) peephole ].
+	^ lhs
 ]
 
 { #category : #'private - parsing' }
@@ -104,6 +134,17 @@ SimpleParser >> parseReturn [
 	node := self parseExpression.
 	expr := self require: ';' returning: node.
 	^ SimpleReturnNode control: self class startNode data: expr
+]
+
+{ #category : #'private - parsing' }
+SimpleParser >> parseUnary [
+	"Parse a mullplicative expression
+	
+	- multiplicativeExpr : unaryExpr : ('-') unaryExpr | primaryExpr"
+
+	(lexer match: '-')
+		ifTrue: [ ^ (SimpleMinusNode newNode: self parseUnary) peephole ].
+	^ self parsePrimary
 ]
 
 { #category : #private }
