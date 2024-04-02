@@ -2,23 +2,21 @@
 I represent the Integer type
 "
 Class {
-	#name : 'SimpleIntegerType',
-	#superclass : 'SimpleType',
+	#name : #SimpleIntegerType,
+	#superclass : #SimpleType,
 	#instVars : [
 		'con'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : 'Simple-Base'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleIntegerType class >> constant: value [
 
 ^ self withValue: value
 ]
 
-{ #category : 'private - creation' }
+{ #category : #'private - creation' }
 SimpleIntegerType class >> withValue: value [
 
 	| val |
@@ -28,13 +26,13 @@ SimpleIntegerType class >> withValue: value [
 ^val 
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleIntegerType class >> zero [
 
 	^ self withValue: 0
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 SimpleIntegerType >> = anObject [
 	"Answer whether the receiver and the argument represent the same
 	object. If = is redefined in any subclass, consider also redefining the
@@ -44,7 +42,7 @@ SimpleIntegerType >> = anObject [
 	^ self class =  anObject class and: [ self val = anObject val ]
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 SimpleIntegerType >> hash [
 	"Answer a SmallInteger whose value is related to the receiver's identity.
 	May be overridden, and should be overridden in any classes that define = "
@@ -52,13 +50,13 @@ SimpleIntegerType >> hash [
 	^ self val identityHash
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleIntegerType >> isConstant [
 
 	^ true
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleIntegerType >> printOn: aStream [
 	"Append to the argument, aStream, a sequence of characters that
 	identifies the receiver."
@@ -66,13 +64,13 @@ SimpleIntegerType >> printOn: aStream [
 	self val printOn: aStream
 ]
 
-{ #category : 'private - creation' }
+{ #category : #'private - creation' }
 SimpleIntegerType >> setValue: val [
 
 con := val 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SimpleIntegerType >> val [
 "The constant value observed for this type"
 	^ con

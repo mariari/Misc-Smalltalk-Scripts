@@ -2,21 +2,19 @@
 I represent a Unitary Minus node
 "
 Class {
-	#name : 'SimpleMinusNode',
-	#superclass : 'SimpleNode',
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#name : #SimpleMinusNode,
+	#superclass : #SimpleNode,
+	#category : 'Simple-Base'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleMinusNode class >> newNode: node [
 	"Creates a new node"
 
 	^ super newNode: { nil . node }
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleMinusNode >> compute [
 	"This function needs to be monotonic: See the Readme of the class for more information"
 
@@ -29,13 +27,13 @@ SimpleMinusNode >> compute [
 	^ SimpleType bottom
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleMinusNode >> idealize [
 	"TODO: add of 0"
 	^ nil
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleMinusNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.
 

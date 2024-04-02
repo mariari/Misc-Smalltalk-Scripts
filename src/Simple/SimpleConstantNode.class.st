@@ -8,14 +8,12 @@ value. As we add other types of constants, we will refactor how we represent Con
 - The Constant's value is the value stored in it.
 "
 Class {
-	#name : 'SimpleConstantNode',
-	#superclass : 'SimpleNode',
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#name : #SimpleConstantNode,
+	#superclass : #SimpleNode,
+	#category : 'Simple-Base'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleConstantNode class >> newNode: value [
 	"Creates a new node"
 
@@ -25,20 +23,20 @@ SimpleConstantNode class >> newNode: value [
 	^ val
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleConstantNode >> compute [
 	"This function needs to be monotonic: See the Readme of the class for more information"
 
 	^ type
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleConstantNode >> idealize [
 
 	^ nil
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleConstantNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.
 	

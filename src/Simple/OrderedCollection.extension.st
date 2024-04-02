@@ -1,6 +1,6 @@
-Extension { #name : 'OrderedCollection' }
+Extension { #name : #OrderedCollection }
 
-{ #category : '*Simple' }
+{ #category : #'*Simple' }
 OrderedCollection >> removeAtShuffle: index [
 	"Fast Constant Time, element removal. DOES NOT PRESERVE ORDER"
 

@@ -20,20 +20,18 @@ Note that `SimpleNodePeephole class` can turn on and off the peephole optimizer,
 
 "
 Class {
-	#name : 'SimpleNode',
-	#superclass : 'Object',
+	#name : #SimpleNode,
+	#superclass : #Object,
 	#instVars : [
 		'nid',
 		'inputs',
 		'outputs',
 		'type'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : #'Simple-Base'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleNode class >> newNode: nodes [
 	"Creates a new node"
 
@@ -41,7 +39,7 @@ SimpleNode class >> newNode: nodes [
 	^ self new inputs: nodes with: SimpleNodeCounter singleton newNode 
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 SimpleNode >> addOutput: node [
 	"I add an output node to myself. 
 	I assume the node adding me already added me as input
@@ -51,21 +49,21 @@ SimpleNode >> addOutput: node [
 	outputs addLast: node
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SimpleNode >> at: index [
 	"Gets the ith input node, may return a `SimpleNode` or nil"
 
 	^ inputs at: index
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleNode >> compute [
 	"This function needs to be monotonic: See the Readme of the class for more information"
 
 	self subclassResponsibility
 ]
 
-{ #category : 'private - analysis' }
+{ #category : #'private - analysis' }
 SimpleNode >> computeBiOpNumberWith: ablock [
 
 	| ty1 ty2 |
@@ -79,14 +77,14 @@ SimpleNode >> computeBiOpNumberWith: ablock [
 	^ SimpleType bottom
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> deadName [
 	"The name that gets printed when the Node is dead. Typically unique: dead"
 
 	^ self uniqueName , '(Dead)'
 ]
 
-{ #category : 'private - removing' }
+{ #category : #'private - removing' }
 SimpleNode >> delUse: node [
 	"We remove the used node from our use list
 	This is likely triggered as that node has stop using us :("
@@ -95,13 +93,13 @@ SimpleNode >> delUse: node [
 	^ outputs size isZero
 ]
 
-{ #category : 'getter' }
+{ #category : #getter }
 SimpleNode >> getType [
 
 	^ type
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> glabel [
 	"The graphical label of the given node.
 	This is different from the label in that some
@@ -110,20 +108,20 @@ SimpleNode >> glabel [
 	^ self label
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleNode >> idealize [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'sizes' }
+{ #category : #sizes }
 SimpleNode >> inputSize [
 "Gets the size of the inputs"
 
 ^ inputs size
 ]
 
-{ #category : 'sizes' }
+{ #category : #sizes }
 SimpleNode >> inputs [
 	"Inputs to the node. These are use-def references to Nodes.
      Generally fixed length, ordered, nulls allowed, no unused trailing space.
@@ -133,7 +131,7 @@ SimpleNode >> inputs [
 	^ inputs
 ]
 
-{ #category : 'creation' }
+{ #category : #creation }
 SimpleNode >> inputs: nodes with: id [
 
 	nid := id.
@@ -142,41 +140,41 @@ SimpleNode >> inputs: nodes with: id [
 	nodes do: [ :n | n ifNotNil: [ n addOutput: self ] ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleNode >> isCFG [
 	"Checks if the node is a CFG node"
 
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleNode >> isDead [
 	"I'm mostly used for assertions and testing"
 
 	^ self isUnused & (self inputSize = 0) & type isNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleNode >> isUnused [
 	"Checks if the node is unused"
 
 	^ outputs isEmpty 
 ]
 
-{ #category : 'private - removing' }
+{ #category : #'private - removing' }
 SimpleNode >> kill [
 	"Kills the node"
 
 	[ self isUnused ] assert.
 
-	1 to: inputs size do: [ :i | self setAt: i ].
+	1 to: inputs size do: [ :i | self unsetAt: i ].
 	"slow find better"
 	inputs removeAll.
 	self setType: nil.
 	[ self isDead ] assert
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> label [
 	"The label of the given node. Useful for debugging and inspecting."
 
@@ -184,14 +182,23 @@ SimpleNode >> label [
 		          'Simple') ifEmpty: [ 'Node' ]
 ]
 
-{ #category : 'sizes' }
+{ #category : #accessing }
+SimpleNode >> nid [
+	"Each node has a unique dense Node ID within a compilation context
+	The ID is useful for debugging, for using as an offset in a bitvector,
+	as well as for computing equality of nodes (to be implemented later)."
+
+	^ nid
+]
+
+{ #category : #sizes }
 SimpleNode >> outputSize [
 	"Gets the size of the outputs"
 
 	^ outputs size
 ]
 
-{ #category : 'sizes' }
+{ #category : #sizes }
 SimpleNode >> outputs [
 	"Outputs reference Nodes that are not null and have this Node as an input.
 	 These nodes are users of this node, thus these are def-use references to Nodes.
@@ -203,9 +210,9 @@ SimpleNode >> outputs [
 	^ outputs
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleNode >> peephole [
-	"Try to peephole the node, and find a better replacement for the Nod"
+	"Try to peephole the node, and find a better replacement for the Node"
 
 	| computed_type n |
 	"Compute the initial or improved type"
@@ -224,7 +231,7 @@ SimpleNode >> peephole [
 	^ n ifNotNil: [ ^ n ]  ifNil: [ ^ self  ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> printOn: aStream [
 	"Append to the argument, aStream, a sequence of characters that
 	identifies the receiver."
@@ -238,7 +245,7 @@ SimpleNode >> printOn: aStream [
 	ifTrue: [  self printSingleCheckDead: aStream. ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.
 
@@ -247,7 +254,7 @@ SimpleNode >> printSingle: aStream [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> printSingleCheckDead: aStream [
 	"Appends the node to the given Stream.
 	This works in tandem with `#printSingle:`
@@ -262,16 +269,7 @@ SimpleNode >> printSingleCheckDead: aStream [
 		ifFalse: [ self printSingle: aStream ]
 ]
 
-{ #category : 'setting' }
-SimpleNode >> setAt: index [
-	"Sets the def (input) node at the given index to nil.
-
-	Erasing the number of defs we use."
-
-	^ self setAt: index def: nil
-]
-
-{ #category : 'setting' }
+{ #category : #setting }
 SimpleNode >> setAt: index def: new [
 	"Changes the given input(def) node at a location into the given `new` node
 
@@ -292,14 +290,14 @@ SimpleNode >> setAt: index def: new [
 	^ new
 ]
 
-{ #category : 'setter' }
+{ #category : #setter }
 SimpleNode >> setType: val [
 	"Gets the ith input node"
 
 	type := val
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SimpleNode >> type [
 	"Current computed type for this Node.  
 	This value changes as the graph changes 
@@ -307,9 +305,18 @@ SimpleNode >> type [
 	^ type
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleNode >> uniqueName [
 	"Unique label for graph visualization, e.g. ""Add12"" or ""Region30"" or ""EQ99"""
 
 	^ self label , nid asString
+]
+
+{ #category : #setting }
+SimpleNode >> unsetAt: index [
+	"Sets the def (input) node at the given index to nil.
+
+	Erasing the number of defs we use."
+
+	^ self setAt: index def: nil
 ]

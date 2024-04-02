@@ -2,21 +2,19 @@
 I represent a Multiplication node
 "
 Class {
-	#name : 'SimpleMulNode',
-	#superclass : 'SimpleNode',
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#name : #SimpleMulNode,
+	#superclass : #SimpleNode,
+	#category : 'Simple-Base'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 SimpleMulNode class >> left: lhs  right: rhs [
 	"Creates a new node"
 
 	^ self newNode: { nil. lhs. rhs }
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleMulNode >> compute [
 	"This function needs to be monotonic: See the Readme of the class for more information"
 
@@ -24,13 +22,13 @@ SimpleMulNode >> compute [
 		  SimpleIntegerType constant: ty1 val * ty2 val ]
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleMulNode >> idealize [
 	"TODO: add of 0"
 	^ nil
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleMulNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.
 

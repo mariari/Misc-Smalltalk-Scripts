@@ -2,20 +2,18 @@
 I turn on or off peephole optimization for the SoN Compiler
 "
 Class {
-	#name : 'SimpleNodePeephole',
-	#superclass : 'Object',
+	#name : #SimpleNodePeephole,
+	#superclass : #Object,
 	#instVars : [
 		'enable'
 	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : 'Simple-Base'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 SimpleNodePeephole class >> initialize [
 	"Upon loading a class, this selector is not looked up.
 	If you want a class to be initialized upon loading, this class should define the selector #intialize explicitly"
@@ -23,31 +21,31 @@ SimpleNodePeephole class >> initialize [
 	uniqueInstance ifNil: [uniqueInstance := self basicNew initialize].
 ]
 
-{ #category : 'accessing - instances and variables' }
+{ #category : #'accessing - instances and variables' }
 SimpleNodePeephole class >> singleton [
 	^ uniqueInstance
 ]
 
-{ #category : 'creation' }
+{ #category : #creation }
 SimpleNodePeephole >> disable [
 
 	enable := false
 ]
 
-{ #category : 'creation' }
+{ #category : #creation }
 SimpleNodePeephole >> enable [
 
 	enable := true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SimpleNodePeephole >> initialize [
 
 	self enable.
 	^ self
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleNodePeephole >> isDisabled [
 
 

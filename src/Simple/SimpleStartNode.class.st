@@ -7,21 +7,19 @@ When we add parameters the value of Start will be a tuple, and will require Proj
 We discuss this in detail in Chapter 9: Functions and Calls.
 "
 Class {
-	#name : 'SimpleStartNode',
-	#superclass : 'SimpleNode',
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#name : #SimpleStartNode,
+	#superclass : #SimpleNode,
+	#category : 'Simple-Base'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleStartNode >> isCFG [
 	"Checks if the node is a CFG node"
 
 	^ true
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleStartNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.
 

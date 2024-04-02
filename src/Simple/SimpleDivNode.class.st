@@ -2,21 +2,19 @@
 I represent a Division node
 "
 Class {
-	#name : 'SimpleDivNode',
-	#superclass : 'SimpleNode',
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#name : #SimpleDivNode,
+	#superclass : #SimpleNode,
+	#category : 'Simple-Base'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 SimpleDivNode class >> left: lhs  right: rhs [
 	"Creates a new node"
 
 	^ self newNode: { nil. lhs. rhs }
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleDivNode >> compute [
 	"This function needs to be monotonic: See the Readme of the class for more information"
 
@@ -26,13 +24,13 @@ SimpleDivNode >> compute [
 			  ifFalse: [ SimpleIntegerType constant: ty1 val / ty2 val ] ]
 ]
 
-{ #category : 'analysis' }
+{ #category : #analysis }
 SimpleDivNode >> idealize [
 	"TODO: add of 0"
 	^ nil
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleDivNode >> printSingle: aStream [
 	"Works in tandem with `#printSingleCheckDead`.
 

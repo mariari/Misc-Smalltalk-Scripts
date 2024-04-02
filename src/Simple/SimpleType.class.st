@@ -16,88 +16,86 @@ simple constant folding e.g. 1+2 == 3 stuff.
 
 "
 Class {
-	#name : 'SimpleType',
-	#superclass : 'Object',
+	#name : #SimpleType,
+	#superclass : #Object,
 	#instVars : [
 		'type'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : 'Simple-Base'
 }
 
-{ #category : 'types' }
+{ #category : #types }
 SimpleType class >> bot [
 "The Bottom (ALL) type"
 
 ^ 0
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleType class >> bottom [
 
 	^ self withValue: self bot
 ]
 
-{ #category : 'types' }
+{ #category : #types }
 SimpleType class >> int [
 	"the set of integers (`TypeInteger` for more info)"
 
 	^ 3
 ]
 
-{ #category : 'types' }
+{ #category : #types }
 SimpleType class >> simple [
 	"End of the simple type"
 
 	^ 2
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 SimpleType class >> strings [
 
 	^ #( Bot Top Simp Int)
 ]
 
-{ #category : 'types' }
+{ #category : #types }
 SimpleType class >> top [
 	"The Top (ALL) type"
 
 	^ 1
 ]
 
-{ #category : 'private - creation' }
+{ #category : #'private - creation' }
 SimpleType class >> withValue: value [
 
 	^ self new setTypeValue: value
 ]
 
-{ #category : 'private - creation' }
+{ #category : #'private - creation' }
 SimpleType >> getType [
 
 	^ type
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleType >> isConstant [ 
 
 ^ type = self class top
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleType >> isSimple [
 
 ^ type < self class simple
 ]
 
-{ #category : 'rendering' }
+{ #category : #rendering }
 SimpleType >> present [
 
 	type ifNil: [ ^ 'Unknown' ].
 	^ self class strings at: type + 1 ifAbsent: 'Unkown'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 SimpleType >> printOn: aStream [
 	"Append to the argument, aStream, a sequence of characters that
 	identifies the receiver."
@@ -109,7 +107,7 @@ SimpleType >> printOn: aStream [
 		nextPutAll: title
 ]
 
-{ #category : 'private - creation' }
+{ #category : #'private - creation' }
 SimpleType >> setTypeValue: value [
 
 type := value

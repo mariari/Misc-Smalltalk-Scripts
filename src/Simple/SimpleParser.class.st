@@ -2,20 +2,18 @@
 I represent a simple parser that converts some source text into a Sea of nodes IR directly in one pass. There is no AST
 "
 Class {
-	#name : 'SimpleParser',
-	#superclass : 'Object',
+	#name : #SimpleParser,
+	#superclass : #Object,
 	#instVars : [
 		'lexer'
 	],
 	#classInstVars : [
 		'startNode'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : #'Simple-Parsing'
 }
 
-{ #category : 'creation' }
+{ #category : #creation }
 SimpleParser class >> source: str [
 	"comment stating purpose of class-side method"
 
@@ -27,7 +25,7 @@ SimpleParser class >> source: str [
 		  lexer: (SimpleLexer source: str)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SimpleParser class >> startNode [
 	" A Global Static, unique to each compilation.  This is a public, so we can make constants everywhere without having to thread the StartNode can make constants everywhere without having to thread the StartNode through the entire parser and optimizer.
         - To make the compiler multithreaded, this field will have to move into a TLS"
@@ -35,20 +33,20 @@ SimpleParser class >> startNode [
 	^ startNode
 ]
 
-{ #category : 'error handling' }
+{ #category : #'error handling' }
 SimpleParser >> error: message [
 
 	RuntimeSyntaxError signal: message
 ]
 
-{ #category : 'private - errors' }
+{ #category : #'private - errors' }
 SimpleParser >> errorSyntax: syntax [
 
 	self error: 'syntax error, expected ' , syntax printString , ': '
 		  , lexer getAnyNextToken printString
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SimpleParser >> lexer: lex [
 	"comment stating purpose of instance-side method"
 
@@ -58,7 +56,7 @@ SimpleParser >> lexer: lex [
 	^ self
 ]
 
-{ #category : 'parsing' }
+{ #category : #parsing }
 SimpleParser >> parse [
 
 
@@ -66,15 +64,15 @@ SimpleParser >> parse [
 	^ self parseReturn
 ]
 
-{ #category : 'private - parsing' }
+{ #category : #'private - parsing' }
 SimpleParser >> parseExpression [
 	"Parse an epxression of the form:
-	- epxr: Primary Expression"
+	- epxr: additiveExpr"
 
-	^ self parsePrimary
+	^ self parseAddition
 ]
 
-{ #category : 'private - parsing' }
+{ #category : #'private - parsing' }
 SimpleParser >> parseIntegerLiteral [
 	"Parse integer literal
 	
@@ -83,7 +81,7 @@ SimpleParser >> parseIntegerLiteral [
 	^ (SimpleConstantNode newNode: lexer parseNumber) peephole
 ]
 
-{ #category : 'private - parsing' }
+{ #category : #'private - parsing' }
 SimpleParser >> parsePrimary [
 	"Parrse a primary expression
 	
@@ -96,7 +94,7 @@ SimpleParser >> parsePrimary [
 	self error: 'Syntax error, expected integer literal'
 ]
 
-{ #category : 'private - parsing' }
+{ #category : #'private - parsing' }
 SimpleParser >> parseReturn [
 	"I parse a return statemnet. 'return' is already parsed
 	
@@ -108,7 +106,7 @@ SimpleParser >> parseReturn [
 	^ SimpleReturnNode control: self class startNode data: expr
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 SimpleParser >> require: syntax returning: node [
 	"Require the given syntax, returning the node if the syntax matches"
 
