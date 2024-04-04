@@ -58,8 +58,6 @@ SimpleParser >> lexer: lex [
 
 { #category : #parsing }
 SimpleParser >> parse [
-
-
 	self require: 'return' returning: ''.
 	^ self parseReturn
 ]
@@ -154,4 +152,9 @@ SimpleParser >> require: syntax returning: node [
 	(lexer match: syntax)
 		ifTrue: [ ^ node ]
 		ifFalse: [ self errorSyntax: syntax ]
+]
+
+{ #category : #accessing }
+SimpleParser >> src [
+	^ lexer input
 ]

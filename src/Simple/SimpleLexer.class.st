@@ -51,6 +51,11 @@ SimpleLexer >> getAnyNextToken [
 	^ peeked asString
 ]
 
+{ #category : #accessing }
+SimpleLexer >> input [
+	^ String newFrom: input 
+]
+
 { #category : #'private - testing' }
 SimpleLexer >> isEOF [
 	"I return true when we are at the EOF"

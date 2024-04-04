@@ -7,6 +7,16 @@ Class {
 	#category : #'Simple-Tests'
 }
 
+{ #category : #accessing }
+SimpleNodeTest >> additionExample [
+	<gtExample>
+	| simple |
+	SimpleNodePeephole singleton disable.
+	simple := SimpleParser source: 'return 1+8;'.
+
+	^ simple parse
+]
+
 { #category : #tests }
 SimpleNodeTest >> testAt [
 
@@ -43,15 +53,13 @@ SimpleNodeTest >> testInputsWith [
 
 { #category : #tests }
 SimpleNodeTest >> testKill [
-
 	| node |
 	node := SimpleConstantNode newNode: (SimpleIntegerType constant: 3).
 	self assert: node isUnused.
 	node kill.
 	self
-		assert: (node isDead)
-		description:
-		'We can kill an unused node and it really is dead at the end'
+		assert: node isDead
+		description: 'We can kill an unused node and it really is dead at the end'
 ]
 
 { #category : #tests }

@@ -12,10 +12,9 @@ SimpleGraphTest >> foo [
 
 	simple_parse := simple parse.
 
-	graph := SimpleDotGraph new findall: simple.
+	graph := SimpleGraph new findall: simple.
 
 	stream := WriteStream on: String new.
-	SimpleDotGraph new nodes: graph with: stream.
 	^ stream 
 ]
 
@@ -26,7 +25,7 @@ SimpleGraphTest >> testFindAllNodes [
 	SimpleNodePeephole singleton enable.
 	simple_parse := simple parse.
 
-	graph := SimpleDotGraph new findall: simple.
+	graph := SimpleGraph new findall: simple.
 	self
 		assert: (graph contains: [ :n | n label = 'Start' ]);
 		assert: (graph contains: [ :n | n label = 'Return' ]);
