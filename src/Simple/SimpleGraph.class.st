@@ -11,7 +11,7 @@ SimpleGraph >> findall: parser [
 	| all |
 	"Parser is currently Unused"
 	all := Dictionary new.
-	SimpleParser startNode do: [ :node | self walk: node into: all ].
+	SimpleParser startNode outputs do: [ :node | self walk: node into: all ].
 	^ all values
 ]
 
@@ -20,7 +20,6 @@ SimpleGraph >> walk: node into: allNodes [
 	"Walk a subgraph and populate distinct nodes in the all dictionary"
 
 	"Been there done that"
-
 	(allNodes includesKey: node nid) ifTrue: [ ^ nil ].
 	allNodes at: node nid put: node.
 
