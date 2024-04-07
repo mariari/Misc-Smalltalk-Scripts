@@ -8,6 +8,16 @@ Class {
 }
 
 { #category : #accessing }
+SimpleNodeTest >> NumericExpressionExample [
+	<gtExample>
+	| simple |
+	SimpleNodePeephole singleton disable.
+	simple := SimpleParser source: 'return 1+2*3+-5;'.
+
+	^ simple parse
+]
+
+{ #category : #accessing }
 SimpleNodeTest >> additionExample [
 	<gtExample>
 	| simple |

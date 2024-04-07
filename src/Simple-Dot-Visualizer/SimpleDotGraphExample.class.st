@@ -46,3 +46,16 @@ SimpleDotGraphExample >> basicNodes [
 	SimpleDotGraph new nodes: graph with: stream.
 	^ stream contents
 ]
+
+{ #category : #accessing }
+SimpleDotGraphExample >> complexGraph [
+	<gtExample>
+	| simple simple_parse stream |
+	SimpleNodePeephole singleton disable.
+	simple := SimpleParser source: 'return 1+2*3+-5;'.
+
+	simple_parse := simple parse.
+
+	stream := WriteStream on: String new.
+	^ SimpleDotGraph new generateDotOutput: simple
+]

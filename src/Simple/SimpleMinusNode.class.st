@@ -4,7 +4,7 @@ I represent a Unitary Minus node
 Class {
 	#name : #SimpleMinusNode,
 	#superclass : #SimpleNode,
-	#category : 'Simple-Base'
+	#category : #'Simple-Base'
 }
 
 { #category : #'instance creation' }
@@ -21,7 +21,7 @@ SimpleMinusNode >> compute [
 	| ty |
 	ty := (self at: 2) type.
 	(ty isKindOf: SimpleIntegerType) ifTrue: [
-		^ ty val isConstant
+		^ ty isConstant
 			  ifTrue: [ SimpleIntegerType constant: ty val negated ]
 			  ifFalse: [ ty ] ].
 	^ SimpleType bottom
