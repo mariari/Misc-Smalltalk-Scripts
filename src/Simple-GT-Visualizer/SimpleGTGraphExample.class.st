@@ -26,7 +26,7 @@ SimpleGTGraphExample >> basicGraph: nodes withView: view [
 SimpleGTGraphExample >> basicGraphEdges: nodes withView: view [
 	view edges
 		stencil: [ :toNode :fromElementVisual :toElement | 
-			| color fromNode border simpToStart |
+			| color fromNode border simpToStart edgeNumber |
 			fromNode := fromElementVisual graph model.
 
 			simpToStart := (toNode isKindOf: SimpleConstantNode)
@@ -38,6 +38,8 @@ SimpleGTGraphExample >> basicGraphEdges: nodes withView: view [
 							ifTrue: [ Color red alpha: 1.0 ]
 							ifFalse: [ Color black alpha: 1.0 ] ].
 
+			edgeNumber := (toNode inputs indexOf: fromNode).
+			
 			border := BlBorder paint: color width: 1.
 			border := simpToStart
 					ifTrue: [ border copyWithStyle: BlStrokeStyle dashed ]
@@ -46,7 +48,8 @@ SimpleGTGraphExample >> basicGraphEdges: nodes withView: view [
 			BlBezierElement new
 				border: border;
 				zIndex: -1;
-				fromHead: (BlArrowheadSimpleArrow new background: color) ];
+				fromHead: (BlArrowheadSimpleArrow new background: color);
+				toHead: (BlTextElement new text: edgeNumber asString asRopedText)];
 		connectFromAll: [ :node | node inputs ]
 ]
 
