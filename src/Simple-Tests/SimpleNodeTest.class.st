@@ -2,13 +2,12 @@
 A SimpleNodeTest is a test class for testing the behavior of SimpleNode
 "
 Class {
-	#name : 'SimpleNodeTest',
-	#superclass : 'TestCase',
-	#category : 'Simple-Tests',
-	#package : 'Simple-Tests'
+	#name : #SimpleNodeTest,
+	#superclass : #TestCase,
+	#category : 'Simple-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleNodeTest >> testAt [
 
 	| node_1 node_2 |
@@ -17,7 +16,7 @@ SimpleNodeTest >> testAt [
 	self assert: (node_2 at: 1) equals: node_1 .
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleNodeTest >> testInputsWith [
 
 	| node_1 node_2 |
@@ -31,13 +30,13 @@ SimpleNodeTest >> testInputsWith [
 	self assert: node_2 isUnused.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleNodeTest >> testNoSemicolon [
 
 	self should: [ (SimpleParser source: 'return 100') parse ] raise: Error
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleNodeTest >> testSimpleProgram [
 
 	| parser ret start expr |
@@ -53,7 +52,7 @@ SimpleNodeTest >> testSimpleProgram [
 	self assert: 1 equals: expr getValue
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleNodeTest >> testStartingWith0 [
 
 	self
