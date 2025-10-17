@@ -12,12 +12,13 @@ PharoInfo PharoLOC
 ```
 "
 Class {
-	#name : #PharoInfo,
-	#superclass : #Object,
-	#category : #MiscPharoScripts
+	#name : 'PharoInfo',
+	#superclass : 'Object',
+	#category : 'MiscPharoScripts',
+	#package : 'MiscPharoScripts'
 }
 
-{ #category : #infos }
+{ #category : 'infos' }
 PharoInfo class >> PharoLOC [
 
 	"Checking the LOC in the entire Pharo Image"

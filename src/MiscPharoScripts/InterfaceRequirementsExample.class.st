@@ -1,12 +1,13 @@
 Class {
-	#name : #InterfaceRequirementsExample,
-	#superclass : #Object,
+	#name : 'InterfaceRequirementsExample',
+	#superclass : 'Object',
 	#traits : 'TSetArithmetic',
 	#classTraits : 'TSetArithmetic classTrait',
-	#category : #MiscPharoScripts
+	#category : 'MiscPharoScripts',
+	#package : 'MiscPharoScripts'
 }
 
-{ #category : #'tests - set arithmetic' }
+{ #category : 'tests - set arithmetic' }
 InterfaceRequirementsExample >> testDifferenceWithSeparateCollection [
 
 	"Answer the set theoretic difference of two collections."

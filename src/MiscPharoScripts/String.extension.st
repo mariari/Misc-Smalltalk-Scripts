@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*MiscPharoScripts' }
+{ #category : '*MiscPharoScripts' }
 String >> isPalendrome [
 	^ self = self reverse .
 ]
