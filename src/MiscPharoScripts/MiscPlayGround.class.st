@@ -61,6 +61,15 @@ MiscPlayGround class >> StreamExample [
 MiscPlayGround >> bestFitFor: xs and: ys [
 	"I calculate the best fit for a given collection of x y data"
 
+	"The formula for a line is y = a + bx
+	where we are trying to find a and b that minimizes error
+	S(a,b) = ∑(yi - (a +b * xi))²
+	
+	We want the slope at every line so we gather it by taking the derivative
+	derivative for a and b  at 0 gives us 
+	b = ∑(xi - xmean)(yi - ymean)/ ∑(xi - xmean)²
+	therefore: a = ymean - bmean * x
+	"
 	| meanX meanY varX cov slope intercept xmin xmax y1 y2 |
 	meanX := xs sum / xs size.
 	meanY := ys sum / ys size.
