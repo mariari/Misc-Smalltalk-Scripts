@@ -1,11 +1,10 @@
 Class {
-	#name : 'SimpleLexerTest',
-	#superclass : 'TestCase',
-	#category : 'Simple-Tests',
-	#package : 'Simple-Tests'
+	#name : #SimpleLexerTest,
+	#superclass : #TestCase,
+	#category : 'Simple-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleLexerTest >> testEnoughSpace [
 
 	| lex |
@@ -17,7 +16,7 @@ SimpleLexerTest >> testEnoughSpace [
 	self deny: (lex enoughSpace: 3)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleLexerTest >> testGetAnyNextToken [
 
 	| lex |
@@ -28,7 +27,7 @@ SimpleLexerTest >> testGetAnyNextToken [
 	self assert: lex getAnyNextToken equals: 'Narn'.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleLexerTest >> testMatch [
 
 	| lex |
@@ -38,20 +37,20 @@ SimpleLexerTest >> testMatch [
 	self assert: (lex match: 'Great').
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleLexerTest >> testParseNumber [
 
 	| lex |
 	lex := SimpleLexer source: '1231'.
-	self assert: lex parseNumber equals: 1231.
+	self assert: lex parseNumber val equals: 1231.
 	self should: [ lex parseNumber ] raise: Error.
 	
 	lex := SimpleLexer source: '123451Nimbari'.
-	self assert: lex parseNumber equals: 123451.
+	self assert: lex parseNumber val equals: 123451.
 	self assert: lex getAnyNextToken equals: 'Nimbari' 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 SimpleLexerTest >> testSkipWhiteSpace [
 
 	| lex |

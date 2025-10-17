@@ -2,20 +2,18 @@
 I help numbering unique nodes in Parsing for SoN
 "
 Class {
-	#name : 'SimpleNodeCounter',
-	#superclass : 'Object',
+	#name : #SimpleNodeCounter,
+	#superclass : #Object,
 	#instVars : [
 		'value'
 	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : 'Simple-Base'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 SimpleNodeCounter class >> initialize [
 	"Upon loading a class, this selector is not looked up.
 	If you want a class to be initialized upon loading, this class should define the selector #intialize explicitly"
@@ -23,27 +21,27 @@ SimpleNodeCounter class >> initialize [
 	uniqueInstance ifNil: [uniqueInstance := self basicNew initialize].
 ]
 
-{ #category : 'accessing - instances and variables' }
+{ #category : #'accessing - instances and variables' }
 SimpleNodeCounter class >> singleton [
 	^ uniqueInstance 
 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SimpleNodeCounter >> initialize [
 
 	self reset.
 	^ self
 ]
 
-{ #category : 'creation' }
+{ #category : #'as yet unclassified' }
 SimpleNodeCounter >> newNode [
 
 	value := value + 1.
 	^ value - 1
 ]
 
-{ #category : 'initialization' }
+{ #category : #'as yet unclassified' }
 SimpleNodeCounter >> reset [
 
 value := 1.

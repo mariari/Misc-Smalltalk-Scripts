@@ -7,36 +7,56 @@ I have two inputs.  The first input is a control node and the second is the data
 - My output is the value from the data node.
 "
 Class {
-	#name : 'SimpleReturnNode',
-	#superclass : 'SimpleNode',
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#name : #SimpleReturnNode,
+	#superclass : #SimpleNode,
+	#category : #'Simple-Base'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 SimpleReturnNode class >> control: ctrl data: data [
-
+	"See my documentation for more information"
 	^ self newNode: {
 			  ctrl.
 			  data }
 ]
 
-{ #category : 'accessing' }
+{ #category : #analysis }
+SimpleReturnNode >> compute [
+	"This function needs to be monotonic: See the Readme of the class for more information"
+
+	^ SimpleType bottom
+]
+
+{ #category : #accessing }
 SimpleReturnNode >> ctrl [
 
 ^ self at: 1
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SimpleReturnNode >> expr [
 
 	^ self at: 2
 ]
 
-{ #category : 'testing' }
+{ #category : #analysis }
+SimpleReturnNode >> idealize [
+
+	^ nil
+]
+
+{ #category : #testing }
 SimpleReturnNode >> isCFG [
 	"Checks if the node is a CFG node"
 
 	^ true
+]
+
+{ #category : #printing }
+SimpleReturnNode >> printSingle: aStream [
+	"Tik tok with `#print0On:`"
+
+	aStream nextPutAll: 'return '.
+	self expr printSingleCheckDead: aStream.
+	aStream nextPutAll: ';'
 ]

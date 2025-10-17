@@ -2,31 +2,29 @@
 I am a lexer for the simple language. SimpleParser uses me internally
 "
 Class {
-	#name : 'SimpleLexer',
-	#superclass : 'Object',
+	#name : #SimpleLexer,
+	#superclass : #Object,
 	#instVars : [
 		'input',
 		'position'
 	],
-	#category : 'Simple-Base',
-	#package : 'Simple',
-	#tag : 'Base'
+	#category : #'Simple-Parsing'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SimpleLexer class >> buffer: aCollection [
 	"Direct from disk file source"
 	^ self new buffer: aCollection
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SimpleLexer class >> source: str [
 	"Record the source text for lexing"
 
 	^ self buffer: str asArray 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SimpleLexer >> buffer: aCollection [
 
 	position := 1.
@@ -34,14 +32,14 @@ SimpleLexer >> buffer: aCollection [
 	^ self
 ]
 
-{ #category : 'private - utility' }
+{ #category : #'private - utility' }
 SimpleLexer >> enoughSpace: length [
 	"I check if the given length would go out of the buffer space"
 
 	^ position - 1 + length <= input size
 ]
 
-{ #category : 'accessing - token' }
+{ #category : #'accessing - token' }
 SimpleLexer >> getAnyNextToken [
 	"I am Used for errors"
 
@@ -53,27 +51,32 @@ SimpleLexer >> getAnyNextToken [
 	^ peeked asString
 ]
 
-{ #category : 'private - testing' }
+{ #category : #accessing }
+SimpleLexer >> input [
+	^ String newFrom: input 
+]
+
+{ #category : #'private - testing' }
 SimpleLexer >> isEOF [
 	"I return true when we are at the EOF"
 
 	^ (self enoughSpace: 1) not
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 SimpleLexer >> isNumber [
 
 ^ self peek isDigit 
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 SimpleLexer >> isWhitespace [
 	"True if a white space character"
 
 	^ self peek isSeparator 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SimpleLexer >> match: syntax [
 	"I return true if we find 'syntax' after skipping white space; also
 	then advance the cursor past syntax. 
@@ -86,7 +89,7 @@ SimpleLexer >> match: syntax [
 	^ isAtPosition 
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #'private - tokenizing' }
 SimpleLexer >> nextChar [
 
 	| ch | 
@@ -96,13 +99,13 @@ SimpleLexer >> nextChar [
 	
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #'private - tokenizing' }
 SimpleLexer >> parseId [
 
 	^ self readUntil: [ :char | char isSimpleIdLetter ]
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #'private - tokenizing' }
 SimpleLexer >> parseNumber [
 
 	| snum ssize |
@@ -110,19 +113,15 @@ SimpleLexer >> parseNumber [
 	ssize := snum size.
 	ssize = 0 | (ssize > 1 and: [ (snum at: 1) = $0 ]) ifTrue: [
 		Error signal: 'Syntax error: integer values cannot start with: 0' ].
-	^ snum asNumber
+	^ SimpleIntegerType withValue: snum  asNumber
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #'private - tokenizing' }
 SimpleLexer >> parsePunctuation [
-
-	| start |
-	start := position.
-	position := position + 1.
-	^ (input copyFrom: start to: start) as: String
+	^ self nextChar asString
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #'private - tokenizing' }
 SimpleLexer >> peek [
 	"Peek next character, or report EOF"
 
@@ -131,20 +130,30 @@ SimpleLexer >> peek [
 		  ifFalse: [ (input at: position) asCharacter ]
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #printing }
+SimpleLexer >> printOn: aStream [
+	"Append to the argument, aStream, a sequence of characters that
+	identifies the receiver."
+
+	super printOn: aStream.
+	aStream nextPutAll: '('.
+	aStream nextPutAll: (input copyFrom: position  to: input size).
+	aStream nextPutAll: ')'.
+]
+
+{ #category : #'private - tokenizing' }
 SimpleLexer >> readUntil: ablock [
-	"reads until the block returns false, moving the parser. 
-	The given block should call nextChar in some way"
+	"reads until the block returns false, moving the parser."
 
 	| start str |
 	start := position.
 	[  ablock value: self nextChar  ] whileTrue.
 	str := input copyFrom: start to: position - 2.
-	str ifNotEmpty: [ position := position - 1 ].
+	position := position - 1.
 	^ str as: String
 ]
 
-{ #category : 'private - tokenizing' }
+{ #category : #'private - tokenizing' }
 SimpleLexer >> skipWhitespace [
 	"Return the next non-white-space character"
 

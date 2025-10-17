@@ -1,6 +1,6 @@
-Extension { #name : 'SequenceableCollection' }
+Extension { #name : #SequenceableCollection }
 
-{ #category : '*Simple' }
+{ #category : #'*Simple' }
 SequenceableCollection >> startsWith: collection at: index [
 	"Checks if I at the index starts with the given collection"
 

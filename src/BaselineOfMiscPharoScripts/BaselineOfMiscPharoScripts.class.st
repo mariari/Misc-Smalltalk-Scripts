@@ -21,28 +21,29 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : 'BaselineOfMiscPharoScripts',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfMiscPharoScripts-Baseline',
-	#package : 'BaselineOfMiscPharoScripts',
-	#tag : 'Baseline'
+	#name : #BaselineOfMiscPharoScripts,
+	#superclass : #BaselineOf,
+	#category : #'BaselineOfMiscPharoScripts-Baseline'
 }
 
-{ #category : 'baselines' }
+{ #category : #baselines }
 BaselineOfMiscPharoScripts >> baseline: spec [
-
 	<baseline>
 	spec
 		for: #common
-		do: [ "Deps""self pharoFunctional: spec.""Programs"
-			spec
+		do: [  "Deps""self pharoFunctional: spec.""Programs"spec
 				package: 'MiscPharoScripts';
 				package: 'MiscPharoScriptsTests'
-				with: [ spec requires: #( 'MiscPharoScripts' ) ];
-				package: 'Simple']
+					with: [ spec requires: #('MiscPharoScripts') ];
+				package: 'Simple';
+				package: 'Simple-Tests' with: [ spec requires: #('Simple') ].	"groups"
+			spec
+				group: 'Tests' with: #('Simple-Tests' 'MiscPharoScriptsTests');
+				group: 'GT' with: #();
+				group: 'All' with: #('Tests') ]
 ]
 
-{ #category : 'external projects' }
+{ #category : #'external projects' }
 BaselineOfMiscPharoScripts >> pharoFunctional: spec [
 "Do not load in any Pharo version newer than 9. This will brick your image"
 	spec baseline: 'PharoFunctional' with: [
